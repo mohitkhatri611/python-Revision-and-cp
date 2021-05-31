@@ -145,3 +145,28 @@ def listkeyAppend():
 
 listkeyAppend()
 
+from typing import List
+
+#example of storing list as dictionary values.
+def twoSum(nums, target):
+    # Store indices into dictionary
+    mydict = dict()
+    for idx, num in enumerate(nums):
+        if num in mydict.keys():
+            mydict[num].append(idx)
+        else:
+            mydict[num] = [idx]
+
+    for num in nums:
+        # checks if target is a result of sum of same number residing in two different idx's
+        if (target - num == num):
+            if len(mydict.get(num)) >= 2:
+                return mydict.get(num)[:2]
+            continue
+
+        # checks if target-num is in the dictionary
+        elif mydict.get(target - num):
+            return [mydict.get(num)[0], mydict.get(target - num)[0]]
+    return None
+print(twoSum([3,2,4],6))
+print(twoSum([3,3],6))
